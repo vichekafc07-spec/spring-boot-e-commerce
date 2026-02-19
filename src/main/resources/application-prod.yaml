@@ -3,4 +3,4 @@ spring:
     name: E-commerce
   datasource:
     url: ${SPRING_DATASOURCE_URL}
-websiteUrl: https://vichikastore.com
+websiteUrl: https://mystore.com
