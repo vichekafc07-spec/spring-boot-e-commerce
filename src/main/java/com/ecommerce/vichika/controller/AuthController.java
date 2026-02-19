@@ -48,7 +48,7 @@ public class AuthController {
 
         var cookie = new Cookie("refreshToken", refreshToken.toString());
         cookie.setHttpOnly(true);
-        cookie.setPath("/auth/refresh");
+        cookie.setPath("/api/v1/auth/refresh");
         cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration());
         cookie.setSecure(true);
         response.addCookie(cookie);
@@ -76,6 +76,17 @@ public class AuthController {
                 .orElseThrow(() -> new ResourceNotFoundExceptions("User not found"));
         var userDto = userMapper.toDto(user);
         return ResponseEntity.ok(userDto);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        var cookie = new Cookie("refreshToken", null);
+        cookie.setPath("api/v1/auth/refresh");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return ResponseEntity.noContent().build();
     }
 
 }
