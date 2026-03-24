@@ -25,6 +25,7 @@ It provides RESTful APIs for managing users, products, and orders with secure au
 - Spring Security (JWT)
 - Spring Data JPA (Hibernate)
 - MySQL
+- Migration (Flyway)
 - Maven
 
 ---
@@ -78,7 +79,7 @@ GET /api/v1/products
 
 👨‍💻 Author
 
-Vicheka
+Vicheka Sorl
 
 - GitHub: https://github.com/vichekafc07-spec
 
