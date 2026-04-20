@@ -15,12 +15,10 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "name")
@@ -40,16 +38,6 @@ public class User {
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
-    public void addAddress(Address address) {
-        addresses.add(address);
-        address.setUser(this);
-    }
-
-    public void removeAddress(Address address) {
-        addresses.remove(address);
-        address.setUser(null);
-    }
-
     @ManyToMany
     @JoinTable(
         name = "wishlist",
@@ -57,10 +45,6 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> favoriteProducts = new HashSet<>();
-
-    public void addFavoriteProduct(Product product) {
-        favoriteProducts.add(product);
-    }
 
     @Override
     public String toString() {
